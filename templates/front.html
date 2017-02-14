@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1>Welcome to Build-a-Blog</h1>
+
+{% if past_entries %}
+    <h1>My Blog</h1>
+{% else %}
+    <h1>Get Started Blogging!</h1>
+{% endif %}
+
+{% for entry in past_entries %}
+    <div class="past-entries">
+        <div class="entry-title">{{entry.title}}</div>
+        <div class="entry-created">{{entry.created}}</div>
+        <pre class="entry-body">{{entry.entry}}</pre>
+    </div>
+{% endfor %}
+
+{% endblock %}
