@@ -76,8 +76,13 @@ class NewPostPage(Handler):
 
 class ViewPostHandler(Handler):
     def get(self, id):
-        latest_entry = Blog.get_by_id(int(id),parent=None)
-        self.response.write(latest_entry.title + ' ' + latest_entry.entry)
+        if Blog.get_by_id(int(id),parent=None):
+            latest_entry = Blog.get_by_id(int(id),parent=None)
+            self.response.write(latest_entry.title + '<br>' + latest_entry.entry)
+        else:
+            error = "Entry does not exist"
+            link = '<a href="/">Back to Your Blog</a>'
+            self.response.write(error + '<br>' + link)
 
 app = webapp2.WSGIApplication([
     ('/', MainPage),
