@@ -68,13 +68,19 @@ class NewPostPage(Handler):
         if title and entry:
             a = Blog(title=title, entry=entry)
             a.put()
-            self.redirect("/")
+            route = a.key().id()
+            self.redirect("/blog/{}".format(route))
         else:
             error = "we need both a title and an entry!"
             self.render_new_entry(title, entry, error)
 
+class ViewPostHandler(Handler):
+    def get(self, id):
+        latest_entry = Blog.get_by_id(int(id),parent=None)
+        self.response.write(latest_entry.title + ' ' + latest_entry.entry)
 
 app = webapp2.WSGIApplication([
     ('/', MainPage),
     ('/blog', MainPage),
-    ('/newpost', NewPostPage)], debug=True)
+    ('/newpost', NewPostPage),
+    webapp2.Route('/blog/<id:\d+>', ViewPostHandler)], debug=True)

@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="entry-title">{{latest_entry.title}}</a></div>
+<div class="entry-created">{{latest_entry.created}}</div>
+<pre class="entry-body">{{latest_entry.entry}}</pre>
+
+{% endfor %}
+
+{% endblock %}
