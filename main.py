@@ -78,7 +78,8 @@ class ViewPostHandler(Handler):
     def get(self, id):
         if Blog.get_by_id(int(id),parent=None):
             latest_entry = Blog.get_by_id(int(id),parent=None)
-            self.response.write(latest_entry.title + '<br>' + latest_entry.entry)
+            self.response.write(latest_entry.title + '<br>' + latest_entry.entry +
+                '<br>' + '<a href="/">Back to Your Blog</a>')
         else:
             error = "Entry does not exist"
             link = '<a href="/">Back to Your Blog</a>'
